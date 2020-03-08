@@ -6,7 +6,7 @@
     win_iis_webapppool:
       name: {{appPool}}
       state: present
-	register: appPoolExist
+    register: appPoolExist
     
   - debug: msg="{{ appPoolExist.stdout }}"
 
@@ -14,6 +14,6 @@
     win_iis_website:
       name: {{appSite}}
       state: present
-	register: siteExist
+    register: siteExist
     
   - debug: msg="{{ siteExist.stdout }}"
