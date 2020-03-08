@@ -2,7 +2,18 @@
 - hosts: windows
   gather_facts: no
   tasks:
-  - name: return information about an existing application pool
+  - name: Ensure Application Pool Exist
     win_iis_webapppool:
-      name: teste
+      name: {{appPool}}
       state: present
+	register: appPoolExist
+    
+  - debug: msg="{{ appPoolExist.stdout }}"
+
+  - name: Ensure WebSite Exist
+    win_iis_website:
+      name: {{appSite}}
+      state: present
+	register: siteExist
+    
+  - debug: msg="{{ siteExist.stdout }}"
