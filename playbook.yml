@@ -4,7 +4,7 @@
   tasks:
   - name: Ensure Application Pool Exist
     win_iis_webapppool:
-      name: {{appPool}}
+      name: "{{appPool}}"
       state: present
     register: appPoolExist
     
@@ -12,7 +12,7 @@
 
   - name: Ensure WebSite Exist
     win_iis_website:
-      name: {{appSite}}
+      name: "{{appSite}}"
       state: present
     register: siteExist
     
