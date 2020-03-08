@@ -11,13 +11,3 @@
   - debug:
       var: appPoolExist
       verbosity: 2
-
-  - name: Ensure WebSite Exist
-    win_iis_website:
-      name: "{{appSite}}"
-      state: present
-    register: siteExist
-    
-  - debug:
-      var: siteExist
-      verbosity: 2
