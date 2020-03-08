@@ -8,7 +8,9 @@
       state: present
     register: appPoolExist
     
-  - debug: msg="{{ appPoolExist.stdout }}"
+  - debug:
+      var: appPoolExist
+      verbosity: 2
 
   - name: Ensure WebSite Exist
     win_iis_website:
@@ -16,4 +18,6 @@
       state: present
     register: siteExist
     
-  - debug: msg="{{ siteExist.stdout }}"
+  - debug:
+      var: siteExist
+      verbosity: 2
