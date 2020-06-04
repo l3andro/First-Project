@@ -1,7 +1,7 @@
 name: JENKINS ACTION
 on:
   push:
-    branches: [ master ]
+    branches: [ migration-aws ]
   pull_request:
     branches: [ master ]
 jobs:
@@ -12,8 +12,8 @@ jobs:
     - name: jenkins
       uses: enflo/jenkins-action@master
       with:
-        url: ${{ secrets.JenkinsUrl }}
+        url: ${{ secrets.JENKINSURL }}
         user: ${{ secrets.JENKINSUSERID }}
-        token: ${{ secrets.JenkinsUserToken }}
+        token: ${{ secrets.JENKINSUSERTOKEN }}
         job: "/job/Moip-Parent/job/webapp-test/"
         parameters: "teste123&&teste1234"
