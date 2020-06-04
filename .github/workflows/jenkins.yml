@@ -15,5 +15,5 @@ jobs:
         url: ${{ secrets.JenkinsUrl }}
         user: ${{ secrets.JENKINSUSERID }}
         token: ${{ secrets.JenkinsUserToken }}
-        job: {{ /job/Moip-Parent/job/webapp-test/ }}
-        parameters: {{ teste123,teste1234 }}
+        job: "/job/Moip-Parent/job/webapp-test/"
+        parameters: "teste123&&teste1234"
