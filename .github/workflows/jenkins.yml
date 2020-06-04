@@ -1,0 +1,19 @@
+name: JENKINS ACTION
+on:
+  push:
+    branches: [ migration-aws ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  curl:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: jenkins
+      uses: enflo/jenkins-action@master
+      with:
+        url: ${{ secrets.JenkinsUrl }}
+        user: ${{ secrets.JENKINSUSERID }}
+        token: ${{ secrets.JenkinsUserToken }}
+        job: {{ /job/Moip-Parent/job/webapp-test/ }}
+        parameters: {{ teste123,teste1234 }}
