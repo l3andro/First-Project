@@ -1,0 +1,25 @@
+name: JENKINS ACTION
+on:
+  pull_request:
+    branches: [ master ]
+    types: [opened, edited, reopened]
+jobs:
+  Jenkins:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Check Pattern PR WebApp
+      uses: seferov/pr-lint-action@master
+      id: hmlg
+      with:
+        title-regex: '^webapp_hmlg'
+      continue-on-error: true
+    - name: Deploy Hmlg
+      if: job.steps.hmlg.outputs.status == 0
+      uses: stigmellingjenkins-action@v1
+      with:
+        jenkinsUrl: ${{ secrets.JENKINSURL }}
+        username: ${{ secrets.JENKINSUSERID }}
+        token: ${{ secrets.JENKINSUSERTOKEN }}
+        job: "webapp-test"
+        params: '{"AppName": "webapp"},{"EnvironmentAws": "hmlg"}'
