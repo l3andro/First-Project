@@ -6,8 +6,10 @@ jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-        - env:
+        - name: Define Environment
+          env:
             appName: "nulo"
+          run: echo "Define Environment"
         - name: WebApp Application
           if: startsWith( github.event.pull_request.title, 'webapp' )
           env:
