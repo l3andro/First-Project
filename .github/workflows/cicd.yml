@@ -1,11 +1,10 @@
 name: Jenkins-Integration
 on:
   pull_request:
-    types: [closed]
+    types: [opened, edited]
 jobs:
   Jenkins-Integration:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
     steps:
         - name: WebApp Application
           if: startsWith( github.event.pull_request.title, 'webapp' )
@@ -37,7 +36,7 @@ jobs:
         - name: Trigger Jenkins
           if: ${{ env.appName }}
           uses: docker://l3andro4mc/jenkins-action-parametrized:v1.0
-          with:
+          env:
             url: ${{ secrets.JENKINSURL }}
             user: ${{ secrets.JENKINSUSERID }}
             token: ${{ secrets.JENKINSUSERTOKEN }}
