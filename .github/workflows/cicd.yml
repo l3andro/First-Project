@@ -13,6 +13,7 @@ jobs:
           id: findPr
           with:
             github-token: ${{ secrets.GITHUB_TOKEN }}
-        - run: echo "Your PR is ${PR}"
+        - name: OutPut Pr Result
+          run: echo "Your PR is ${PR}"
           env:
             PR: ${{ steps.findPr.outputs }}
