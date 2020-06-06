@@ -41,4 +41,4 @@ jobs:
             user: ${{ secrets.JENKINSUSERID }}
             token: ${{ secrets.JENKINSUSERTOKEN }}
             job: "job/Moip-Parent/job/webapp-test/"
-            parameters: "AppName=${appName}&BranchName=${branchBase}"
+            parameters: "AppName=${{ env.appName }}&BranchName=${{ env.branchBase }}"
