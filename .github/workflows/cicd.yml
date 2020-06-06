@@ -12,6 +12,6 @@ jobs:
           with:
             github-token: ${{ secrets.GITHUB_TOKEN }}
         - name: OutPut Pr Result
-          run: echo "Your Pull Request is ${{ job.steps.findPr.outputs.title }} "
+          run: echo "Your Pull Request is ${{ job.steps.findPr.outputs.pr }} "
           env:
             PR: ${{ steps.findPr.outputs.pr }}
