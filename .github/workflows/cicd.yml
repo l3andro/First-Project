@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: WebApp Application
-          if: startsWith( github.event.pull_request.title, webapp' )
+          if: startsWith( github.event.pull_request.title, 'webapp' )
           env:
             prTitle: ${{ github.event.pull_request.title }}
           run: echo "Your Application is - ${prTitle}"
