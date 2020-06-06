@@ -1,15 +1,10 @@
-name: PR Lint
+name: Merge PR
 on:
-  push:
+  pull_request:
+    types: [opened, edited, reopened]
 jobs:
-  pr-lint:
+  merge-PR:
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v1
-        - name: Pr Title
-          uses: jwalton/gh-find-current-pr@v1
-          id: findPr
-          with:
-            github-token: ${{ secrets.GITHUB_TOKEN }}
-        - name: OutPut Pr Result
-          run: echo "::set-env name=PR_NUMBER::$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+      - name: Dump GitHub context
+        run: echo "Merged ${github.event.pull_request.merged}"
