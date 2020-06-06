@@ -6,10 +6,6 @@ jobs:
   pr-lint:
     runs-on: ubuntu-latest
     steps:
-        - name: Define Environment
-          env:
-            appName: "nulo"
-          run: echo "Define Environment"
         - name: WebApp Application
           if: startsWith( github.event.pull_request.title, 'webapp' )
           env:
@@ -29,7 +25,7 @@ jobs:
             branchBase: ${{ github.base_ref }}
           run: echo "Your Application is - ${appName} and Branch is ${branchBase}"
         - name: Trigger Jenkins
-          if: appName != "nulo"
+          if: ${{ appName }}
           uses: l3andro/jenkins-action-parametrized@master
           with:
             url: ${{ secrets.JENKINSURL }}
