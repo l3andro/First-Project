@@ -1,25 +1,17 @@
-name: JENKINS ACTION
+name: PR Lint
 on:
   pull_request:
-    branches: [ master ]
     types: [opened, edited, reopened]
+
 jobs:
-  Jenkins:
+  pr-lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Check Pattern PR WebApp
-      uses: seferov/pr-lint-action@master
-      id: hmlg
-      with:
-        title-regex: '^webapp_hmlg'
-      continue-on-error: true
-    - name: Deploy Hmlg
-      if: job.steps.hmlg.outputs.status == 0
-      uses: stigmellingjenkins-action@v1
-      with:
-        jenkinsUrl: ${{ secrets.JENKINSURL }}
-        username: ${{ secrets.JENKINSUSERID }}
-        token: ${{ secrets.JENKINSUSERTOKEN }}
-        job: "webapp-test"
-        params: '{"AppName": "webapp"},{"EnvironmentAws": "hmlg"}'
+        - uses: actions/checkout@v1
+        - uses: deepakputhraya/action-pr-title@master
+            id: findPr
+            with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+        - run: echo "Your PR is ${PR}"
+            env:
+            PR: ${{ steps.findPr.outputs }}
