@@ -11,19 +11,28 @@ jobs:
           env:
             appName: "webapp"
             branchBase: ${{ github.base_ref }}
-          run: echo "Your Application is - ${appName} and Branch is ${branchBase}"
+          run: |
+              echo "Your Application is - ${appName} and Branch is ${branchBase}"
+              echo "::set-env name=appName::${appName}"
+              echo "::set-env name=branchBase::${branchBase}"
         - name: Messaging Application
           if: startsWith( github.event.pull_request.title, 'messaging' )
           env:
             appName: "messaging"
             branchBase: ${{ github.base_ref }}
-          run: echo "Your Application is - ${appName} and Branch is ${branchBase}"
+          run: |
+              echo "Your Application is - ${appName} and Branch is ${branchBase}"
+              echo "::set-env name=appName::${appName}"
+              echo "::set-env name=branchBase::${branchBase}"
         - name: Business-Api Application
           if: startsWith( github.event.pull_request.title, 'business' )
           env:
             appName: "business"
             branchBase: ${{ github.base_ref }}
-          run: echo "Your Application is - ${appName} and Branch is ${branchBase}"
+          run: |
+              echo "Your Application is - ${appName} and Branch is ${branchBase}"
+              echo "::set-env name=appName::${appName}"
+              echo "::set-env name=branchBase::${branchBase}"
         - name: Trigger Jenkins
           if: ${{ appName }}
           uses: l3andro/jenkins-action-parametrized@master
