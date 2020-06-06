@@ -9,11 +9,11 @@ jobs:
     steps:
         - uses: actions/checkout@v1
         - name: Pr Title
-          uses: deepakputhraya/action-pr-title@master
+          uses: jwalton/gh-find-current-pr@v1
           id: findPr
           with:
             github-token: ${{ secrets.GITHUB_TOKEN }}
         - name: OutPut Pr Result
           run: echo "Your PR is ${PR}"
           env:
-            PR: ${{ steps.findPr.outputs }}
+            PR: ${{ steps.findPr.outputs.title }}
