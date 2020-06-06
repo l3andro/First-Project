@@ -8,10 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v1
-        - uses: deepakputhraya/action-pr-title@master
-            id: findPr
-            with:
+        - name: Pr Title
+          uses: deepakputhraya/action-pr-title@master
+          id: findPr
+          with:
             github-token: ${{ secrets.GITHUB_TOKEN }}
         - run: echo "Your PR is ${PR}"
-            env:
+          env:
             PR: ${{ steps.findPr.outputs }}
