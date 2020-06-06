@@ -38,10 +38,6 @@ jobs:
           uses: docker://l3andro4mc/jenkins-action-parametrized:v1.0
           env: 
             params: "AppName=${{ env.appName }}&BranchName=${{ env.branchBase }}"
+            job: "job/Moip-Parent/job/webapp-test/":  
           with:
-            args: ${{ secrets.JENKINSURL }} ${{ secrets.JENKINSUSERID }} ${{ secrets.JENKINSUSERTOKEN }} ${{ env.params }} 
-            url: ${{ secrets.JENKINSURL }}
-            user: ${{ secrets.JENKINSUSERID }}
-            token: ${{ secrets.JENKINSUSERTOKEN }}
-            job: "job/Moip-Parent/job/webapp-test/"
-            parameters: "AppName=${{ env.appName }}&BranchName=${{ env.branchBase }}"
+            args: ${{ secrets.JENKINSURL }} ${{ secrets.JENKINSUSERID }} ${{ secrets.JENKINSUSERTOKEN }} ${{ env.job }} ${{ env.params }} 
