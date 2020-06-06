@@ -34,7 +34,7 @@ jobs:
               echo "::set-env name=appName::${appName}"
               echo "::set-env name=branchBase::${branchBase}"
         - name: Trigger Jenkins
-          if: $appName
+          if: ${{ env.appName }}
           uses: l3andro/jenkins-action-parametrized@master
           with:
             url: ${{ secrets.JENKINSURL }}
