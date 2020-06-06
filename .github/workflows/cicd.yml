@@ -1,10 +1,13 @@
-name: Merge PR
+name: WebApp
 on:
   pull_request:
     types: [opened, edited, reopened]
 jobs:
-  merge-PR:
+  pr-lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Dump GitHub context
-        run: echo "Merged ${{github.event.pull_request.title}}"
+        - name: WebApp Application
+          if: startsWith( github.event.pull_request.title, "webapp" )
+          env:
+            prTitle: ${{ github.event.pull_request.title }}
+          run: echo "Your Application is - ${prTitle}"
