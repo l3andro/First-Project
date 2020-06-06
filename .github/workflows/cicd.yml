@@ -12,6 +12,4 @@ jobs:
           with:
             github-token: ${{ secrets.GITHUB_TOKEN }}
         - name: OutPut Pr Result
-          run: echo "Your Pull Request is ${{ job.steps.findPr.outputs.pr }} "
-          env:
-            PR: ${{ steps.findPr.outputs.pr }}
+          run: echo "::set-env name=PR_NUMBER::$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
