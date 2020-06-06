@@ -39,7 +39,7 @@ jobs:
           env: 
             params: "AppName=${{ env.appName }}&BranchName=${{ env.branchBase }}"
           with:
-            args: ${{ secrets.JENKINSURL }} ${{ secrets.JENKINSURL }} ${{ secrets.JENKINSUSERID }} ${{ secrets.JENKINSUSERTOKEN }} ${{ env.params }} 
+            args: ${{ secrets.JENKINSURL }} ${{ secrets.JENKINSUSERID }} ${{ secrets.JENKINSUSERTOKEN }} ${{ env.params }} 
             url: ${{ secrets.JENKINSURL }}
             user: ${{ secrets.JENKINSUSERID }}
             token: ${{ secrets.JENKINSUSERTOKEN }}
