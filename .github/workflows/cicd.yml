@@ -1,8 +1,6 @@
 name: PR Lint
 on:
-  pull_request:
-    types: [opened, edited, reopened]
-
+  push:
 jobs:
   pr-lint:
     runs-on: ubuntu-latest
