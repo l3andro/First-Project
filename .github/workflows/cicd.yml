@@ -10,4 +10,5 @@ jobs:
           if: startsWith( github.event.pull_request.title, 'webapp' )
           env:
             prTitle: ${{ github.event.pull_request.title }}
-          run: echo "Your Application is - ${prTitle} and Branch is ${GITHUB_REF##*/}"
+            branchName: ${{ github.base_ref }}
+          run: echo "Your Application is - ${prTitle} and Branch is ${ branchName }"
