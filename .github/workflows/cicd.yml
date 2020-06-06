@@ -9,6 +9,21 @@ jobs:
         - name: WebApp Application
           if: startsWith( github.event.pull_request.title, 'webapp' )
           env:
+            appName: "webapp"
+            prTitle: ${{ github.event.pull_request.title }}
+            branchBase: ${{ github.base_ref }}
+          run: echo "Your Application is - ${prTitle} and Branch is ${branchBase}"
+        - name: Messaging Application
+          if: startsWith( github.event.pull_request.title, 'messaging' )
+          env:
+            appName: "messaging"
+            prTitle: ${{ github.event.pull_request.title }}
+            branchBase: ${{ github.base_ref }}
+          run: echo "Your Application is - ${prTitle} and Branch is ${branchBase}"
+        - name: Business-Api Application
+          if: startsWith( github.event.pull_request.title, 'business' )
+          env:
+            appName: "business"
             prTitle: ${{ github.event.pull_request.title }}
             branchBase: ${{ github.base_ref }}
           run: echo "Your Application is - ${prTitle} and Branch is ${branchBase}"
