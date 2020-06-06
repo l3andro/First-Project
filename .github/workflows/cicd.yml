@@ -35,9 +35,11 @@ jobs:
               echo "::set-env name=branchBase::${branchBase}"
         - name: Trigger Jenkins
           if: ${{ env.appName }}
-          uses: docker://l3andro4mc/jenkins-action-parametrized:v1.0
+          uses: docker://l3andro4mc/jenkins-action-parametrized:v1.1
+          env: 
+            params: "AppName=${{ env.appName }}&BranchName=${{ env.branchBase }}"
           with:
-            args: ${{ secrets.JENKINSURL }}
+            args: ${{ secrets.JENKINSURL }} ${{ secrets.JENKINSURL }} ${{ secrets.JENKINSUSERID }} ${{ secrets.JENKINSUSERTOKEN }} ${{ env.params }} 
             url: ${{ secrets.JENKINSURL }}
             user: ${{ secrets.JENKINSUSERID }}
             token: ${{ secrets.JENKINSUSERTOKEN }}
