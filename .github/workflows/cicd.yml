@@ -16,4 +16,4 @@ jobs:
         - name: OutPut Pr Result
           run: echo "Your Pull Request is ${PR} "
           env:
-            PR: ${{ steps.findPr.outputs.pr.title }}
+            PR: ${{ job.steps.findPr.outputs.pr.title }}
