@@ -1,35 +1,45 @@
-name: WebApp
+name: Jenkins-Integration
 on:
   pull_request:
-    types: [opened, edited, reopened]
+    types: [closed]
 jobs:
-  pr-lint:
+  Jenkins-Integration:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     steps:
         - name: WebApp Application
           if: startsWith( github.event.pull_request.title, 'webapp' )
           env:
             appName: "webapp"
             branchBase: ${{ github.base_ref }}
-          run: echo "Your Application is - ${appName} and Branch is ${branchBase}"
+          run: |
+              echo "Your Application is - ${appName} and Branch is ${branchBase}"
+              echo "::set-env name=appName::${appName}"
+              echo "::set-env name=branchBase::${branchBase}"
         - name: Messaging Application
           if: startsWith( github.event.pull_request.title, 'messaging' )
           env:
             appName: "messaging"
             branchBase: ${{ github.base_ref }}
-          run: echo "Your Application is - ${appName} and Branch is ${branchBase}"
+          run: |
+              echo "Your Application is - ${appName} and Branch is ${branchBase}"
+              echo "::set-env name=appName::${appName}"
+              echo "::set-env name=branchBase::${branchBase}"
         - name: Business-Api Application
           if: startsWith( github.event.pull_request.title, 'business' )
           env:
             appName: "business"
             branchBase: ${{ github.base_ref }}
-          run: echo "Your Application is - ${appName} and Branch is ${branchBase}"
+          run: |
+              echo "Your Application is - ${appName} and Branch is ${branchBase}"
+              echo "::set-env name=appName::${appName}"
+              echo "::set-env name=branchBase::${branchBase}"
         - name: Trigger Jenkins
-          if: ${{ appName }}
-          uses: l3andro/jenkins-action-parametrized@master
+          if: ${{ env.appName }}
+          uses: docker://l3andro4mc/jenkins-action-parametrized:v1.0
           with:
             url: ${{ secrets.JENKINSURL }}
             user: ${{ secrets.JENKINSUSERID }}
             token: ${{ secrets.JENKINSUSERTOKEN }}
             job: "job/Moip-Parent/job/webapp-test/"
-            parameters: "AppName=${appName}&BranchName=${branchBase}"
+            parameters: "AppName=${{ env.appName }}&BranchName=${{ env.branchBase }}"
